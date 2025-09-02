@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduHacks - 10th Grade Learning App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #f59e0b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text: #334155;
+            --text-light: #64748b;
+            --card-bg: #ffffff;
+            --header-bg: #2563eb;
+            --gradient: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 32px;
+        }
+        
+        .powered-by {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        /* Auth Pages */
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+        }
+        
+        .auth-form {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 450px;
+            transform: translateY(-10px);
+            transition: transform 0.3s ease;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .auth-form:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .auth-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 28px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        
+        .btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 16px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+        
+        .btn:hover {
+            opacity: 0.92;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(37, 99, 235, 0.3);
+        }
+        
+        .auth-switch {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 15px;
+            color: var(--text-light);
+        }
+        
+        .auth-switch a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .auth-switch a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Home Page */
+        .home-page {
+            padding: 30px 0;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .welcome-banner {
+            background: var(--gradient);
+            color: white;
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .welcome-banner h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .welcome-banner p {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .motivational-slider {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--accent);
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .motivational-slider p {
+            font-size: 20px;
+            font-style: italic;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .subject-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            cursor: pointer;
+            border-top: 4px solid var(--primary);
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subject-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .subject-card p {
+            color: var(--text-light);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-card h3 i {
+            margin-right: 12px;
+            font-size: 26px;
+        }
+        
+        /* Subject Page */
+        .subject-page {
+            padding: 30px 0;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .chapters-list {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .chapter-item {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .chapter-item:hover {
+            background: #f8f9fa;
+            border-radius: 10px;
+            transform: translateX(5px);
+        }
+        
+        .chapter-item:last-child {
+            border-bottom: none;
+        }
+        
+        .download-btn, .watch-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s;
+        }
+        
+        .download-btn:hover, .watch-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .download-btn i, .watch-btn i {
+            margin-right: 8px;
+        }
+        
+        /* Video Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 900px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: scaleIn 0.3s ease-out;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: all 0.2s;
+            z-index: 1001;
+        }
+        
+        .close-modal:hover {
+            color: var(--danger);
+            transform: rotate(90deg);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #000;
+        }
+        
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .fullscreen-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.2s;
+        }
+        
+        .fullscreen-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        
+        /* Admin Panel */
+        .admin-panel {
+            padding: 30px 0;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .admin-form {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .admin-form h3 {
+            margin-bottom: 20px;
+            color: var(--primary);
+            font-size: 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .admin-form h3 i {
+            margin-right: 12px;
+        }
+        
+        /* Profile Page */
+        .profile-page {
+            padding: 30px 0;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .profile-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .profile-card h2 {
+            color: var(--primary);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        
+        .profile-info {
+            margin-bottom: 20px;
+            display: flex;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .profile-info label {
+            font-weight: 600;
+            width: 120px;
+            color: var(--text);
+        }
+        
+        .profile-info span {
+            color: var(--text-light);
+            flex: 1;
+        }
+        
+        /* Navigation */
+        nav {
+            background: var(--card-bg);
+            padding: 18px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a i {
+            margin-right: 8px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        /* Utility Classes */
+        .hidden {
+            display: none;
+        }
+        
+        .error {
+            color: var(--danger);
+            font-size: 14px;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .error i {
+            margin-right: 6px;
+        }
+        
+        .success {
+            color: var(--success);
+            font-size: 14px;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .success i {
+            margin-right: 6px;
+        }
+        
+        .admin-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.2s;
+            margin-left: 10px;
+        }
+        
+        .admin-btn i {
+            margin-right: 6px;
+        }
+        
+        .admin-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .tab {
+            padding: 14px 25px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+            transition: all 0.2s;
+            color: var(--text-light);
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .content-list {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .content-item {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+        
+        .content-item:hover {
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .content-item:last-child {
+            border-bottom: none;
+        }
+        
+        .empty-content {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-light);
+            font-style: italic;
+        }
+        
+        /* File Upload Styles */
+        .file-upload {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .file-preview {
+            margin-top: 10px;
+            max-width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .file-preview video, .file-preview iframe {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .subjects-grid, .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .auth-form {
+                padding: 30px 25px;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .nav-links a {
+                margin: 0;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .admin-btn {
+                margin-top: 10px;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login/Register Section -->
+    <section id="auth-section" class="auth-container">
+        <div class="auth-form" id="login-form">
+            <h2><i class="fas fa-sign-in-alt"></i> Login to EduHacks</h2>
+            <div class="form-group">
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Enter your password">
+            </div>
+            <button class="btn" onclick="login()">Login</button>
+            <div class="auth-switch">
+                Don't have an account? <a href="#" onclick="showRegisterForm()">Register</a>
+            </div>
+            <div class="auth-switch">
+                <a href="#" onclick="showAdminLogin()">Admin Login</a>
+            </div>
+            <div id="login-error" class="error"></div>
+        </div>
+        
+        <div class="auth-form hidden" id="register-form">
+            <h2><i class="fas fa-user-plus"></i> Create an Account</h2>
+            <div class="form-group">
+                <label for="register-name">Full Name</label>
+                <input type="text" id="register-name" placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label for="register-email">Email</label>
+                <input type="email" id="register-email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="register-password">Password</label>
+                <input type="password" id="register-password" placeholder="Create a password">
+            </div>
+            <button class="btn" onclick="register()">Register</button>
+            <div class="auth-switch">
+                Already have an account? <a href="#" onclick="showLoginForm()">Login</a>
+            </div>
+            <div id="register-error" class="error"></div>
+            <div id="register-success" class="success"></div>
+        </div>
+        
+        <div class="auth-form hidden" id="admin-login-form">
+            <h2><i class="fas fa-lock"></i> Admin Login</h2>
+            <div class="form-group">
+                <label for="admin-email">Admin Email</label>
+                <input type="email" id="admin-email" placeholder="Enter admin email">
+            </div>
+            <div class="form-group">
+                <label for="admin-password">Password</label>
+                <input type="password" id="admin-password" placeholder="Enter admin password">
+            </div>
+            <button class="btn" onclick="adminLogin()">Login as Admin</button>
+            <div class="auth-switch">
+                <a href="#" onclick="showLoginForm()">Back to User Login</a>
+            </div>
+            <div id="admin-login-error" class="error"></div>
+        </div>
+    </section>
+    
+    <!-- Main App (initially hidden) -->
+    <div id="app" class="hidden">
+        <header>
+            <div class="container header-content">
+                <div class="logo"><i class="fas fa-graduation-cap"></i>EduHacks</div>
+                <div class="powered-by">Powered by Sahil Barsagade</div>
+            </div>
+        </header>
+        
+        <nav>
+            <div class="container nav-content">
+                <div class="logo">EduHacks - 10th Grade Learning</div>
+                <div class="nav-links">
+                    <a href="#" onclick="showHomePage()"><i class="fas fa-home"></i> Home</a>
+                    <a href="#" onclick="showProfile()"><i class="fas fa-user"></i> Profile</a>
+                    <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="container">
+            <!-- Home Page -->
+            <section id="home-page" class="home-page">
+                <div class="welcome-banner">
+                    <h1>Welcome to EduHacks!</h1>
+                    <p>Your one-stop solution for 10th grade exam preparation</p>
+                </div>
+                
+                <div class="motivational-slider">
+                    <p>"Education is the most powerful weapon which you can use to change the world." - Nelson Mandela</p>
+                </div>
+                
+                <h2><i class="fas fa-book"></i> Subjects</h2>
+                <div class="subjects-grid">
+                    <div class="subject-card" onclick="showSubject('mathematics')">
+                        <h3>Mathematics</h3>
+                        <p>Algebra, Geometry, Trigonometry</p>
+                    </div>
+                    <div class="subject-card" onclick="showSubject('science')">
+                        <h3>Science</h3>
+                        <p>Physics, Chemistry, Biology</p>
+                    </div>
+                    <div class="subject-card" onclick="showSubject('english')">
+                        <h3>English</h3>
+                        <p>Grammar, Literature, Writing</p>
+                    </div>
+                    <div class="subject-card" onclick="showSubject('hindi')">
+                        <h3>Hindi</h3>
+                        <p>व्याकरण, साहित्य, लेखन</p>
+                    </div>
+                    <div class="subject-card" onclick="showSubject('social-science')">
+                        <h3>Social Science</h3>
+                        <p>History, Geography, Civics, Economics</p>
+                    </div>
+                    <div class="subject-card" onclick="showSubject('sanskrit')">
+                        <h3>Sanskrit</h3>
+                        <p>व्याकरण, साहित्यम्</p>
+                    </div>
+                </div>
+                
+                <h2><i class="fas fa-star"></i> Features</h2>
+                <div class="features">
+                    <div class="feature-card">
+                        <h3><i class="fas fa-book"></i> Study Materials</h3>
+                        <p>Access comprehensive study materials for all subjects, including notes, formulas, and important concepts.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-trophy"></i> Exam Hacks</h3>
+                        <p>Learn time management techniques, question patterns, and sure-shot methods to score high marks.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-lightbulb"></i> Question Prediction</h3>
+                        <p>Get insights into questions that are most likely to appear in your board exams based on previous years.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Subject Page -->
+            <section id="subject-page" class="subject-page hidden">
+                <h2 id="subject-title"><i class="fas fa-book"></i> Subject Name</h2>
+                
+                <div class="tabs">
+                    <div class="tab active" onclick="switchSubjectTab('chapters')">Chapters</div>
+                    <div class="tab" onclick="switchSubjectTab('videos')">Video Lessons</div>
+                    <div class="tab" onclick="switchSubjectTab('materials')">Study Materials</div>
+                </div>
+                
+                <div id="chapters-content" class="tab-content active">
+                    <div class="chapters-list" id="chapters-list">
+                        <!-- Chapters will be loaded here dynamically -->
+                        <div class="empty-content">No chapters available for this subject yet.</div>
+                    </div>
+                </div>
+                
+                <div id="videos-content" class="tab-content">
+                    <div class="chapters-list" id="videos-list">
+                        <!-- Videos will be loaded here dynamically -->
+                        <div class="empty-content">No video lessons available for this subject yet.</div>
+                    </div>
+                </div>
+                
+                <div id="materials-content" class="tab-content">
+                    <div class="chapters-list" id="materials-list">
+                        <!-- Materials will be loaded here dynamically -->
+                        <div class="empty-content">No study materials available for this subject yet.</div>
+                    </div>
+                </div>
+                
+                <button class="btn" onclick="showHomePage()"><i class="fas fa-arrow-left"></i> Back to Home</button>
+            </section>
+            
+            <!-- Video Modal -->
+            <div id="video-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal" onclick="closeVideoModal()">&times;</span>
+                    <h2 id="video-modal-title" style="margin-bottom: 20px;"></h2>
+                    <div class="video-container">
+                        <video id="video-player" controls>
+                            Your browser does not support the video tag.
+                        </video>
+                        <button class="fullscreen-btn" onclick="toggleFullScreen()"><i class="fas fa-expand"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Profile Page -->
+            <section id="profile-page" class="profile-page hidden">
+                <div class="profile-card">
+                    <h2><i class="fas fa-user"></i> User Profile</h2>
+                    <div class="profile-info">
+                        <label>Name:</label>
+                        <span id="profile-name">Sahil Barsagade</span>
+                    </div>
+                    <div class="profile-info">
+                        <label>Email:</label>
+                        <span id="profile-email">sahil@example.com</span>
+                    </div>
+                    <div class="profile-info">
+                        <label>Grade:</label>
+                        <span>10th Grade</span>
+                    </div>
+                    <div class="profile-info">
+                        <label>Board:</label>
+                        <span>SSC Board</span>
+                    </div>
+                    <button class="btn" onclick="showHomePage()"><i class="fas fa-arrow-left"></i> Back to Home</button>
+                </div>
+            </section>
+            
+            <!-- Admin Panel -->
+            <section id="admin-panel" class="admin-panel hidden">
+                <h2><i class="fas fa-cog"></i> Admin Panel</h2>
+                
+                <div class="tabs">
+                    <div class="tab active" onclick="switchTab('add-content')">Add Content</div>
+                    <div class="tab" onclick="switchTab('manage-content')">Manage Content</div>
+                    <div class="tab" onclick="switchTab('user-stats')">User Statistics</div>
+                </div>
+                
+                <div id="add-content" class="tab-content active">
+                    <div class="admin-form">
+                        <h3><i class="fas fa-plus"></i> Add New Content</h3>
+                        <div class="form-group">
+                            <label for="content-subject">Subject</label>
+                            <select id="content-subject" class="form-control">
+                                <option value="mathematics">Mathematics</option>
+                                <option value="science">Science</option>
+                                <option value="english">English</option>
+                                <option value="hindi">Hindi</option>
+                                <option value="social-science">Social Science</option>
+                                <option value="sanskrit">Sanskrit</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="content-type">Content Type</label>
+                            <select id="content-type" class="form-control" onchange="toggleFileInput()">
+                                <option value="chapter">Chapter</option>
+                                <option value="video">Video Lesson</option>
+                                <option value="material">Study Material</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="content-title">Title</label>
+                            <input type="text" id="content-title" placeholder="Enter content title">
+                        </div>
+                        <div class="form-group">
+                            <label for="content-description">Description</label>
+                            <textarea id="content-description" placeholder="Enter content description" rows="3" style="width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 10px;"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="content-file">Upload File</label>
+                            <input type="file" id="content-file" accept=".mp4,.pdf,.doc,.docx">
+                            <div id="file-preview" class="file-preview"></div>
+                        </div>
+                        <button class="btn" onclick="addContent()"><i class="fas fa-plus"></i> Add Content</button>
+                    </div>
+                </div>
+                
+                <div id="manage-content" class="tab-content">
+                    <div class="content-list">
+                        <h3><i class="fas fa-list"></i> Manage Content</h3>
+                        <div id="admin-content-list">
+                            <!-- Content will be loaded here dynamically -->
+                            <div class="empty-content">No content available yet.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="user-stats" class="tab-content">
+                    <div class="content-list">
+                        <h3><i class="fas fa-users"></i> User Statistics</h3>
+                        <div class="content-item">
+                            <div>
+                                <strong>Total Users</strong>
+                            </div>
+                            <div id="total-users">
+                                0
+                            </div>
+                        </div>
+                        <div class="content-item">
+                            <div>
+                                <strong>Active This Week</strong>
+                            </div>
+                            <div>
+                                0
+                            </div>
+                        </div>
+                        <div class="content-item">
+                            <div>
+                                <strong>Most Popular Subject</strong>
+                            </div>
+                            <div>
+                                Mathematics
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </section>
+        </div>
+        
+        <footer>
+            <div class="container">
+                <p>&copy; 2023 EduHacks. All rights reserved. Powered by Sahil Barsagade</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // User data storage
+        let users = JSON.parse(localStorage.getItem('eduHacksUsers')) || [];
+        let currentUser = null;
+        let isAdmin = false;
+        let adminCredentials = {
+            email: "admin@eduhacks.com",
+            password: "admin123"
+        };
+        
+        // Content data storage
+        let contentItems = JSON.parse(localStorage.getItem('eduHacksContent')) || [];
+        
+        // DOM Elements
+        const authSection = document.getElementById('auth-section');
+        const app = document.getElementById('app');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const adminLoginForm = document.getElementById('admin-login-form');
+        const homePage = document.getElementById('home-page');
+        const subjectPage = document.getElementById('subject-page');
+        const profilePage = document.getElementById('profile-page');
+        const adminPanel = document.getElementById('admin-panel');
+        const videoModal = document.getElementById('video-modal');
+        
+        // Show register form
+        function showRegisterForm() {
+            loginForm.classList.add('hidden');
+            registerForm.classList.remove('hidden');
+            adminLoginForm.classList.add('hidden');
+            document.getElementById('register-error').textContent = '';
+            document.getElementById('register-success').textContent = '';
+        }
+        
+        // Show login form
+        function showLoginForm() {
+            registerForm.classList.add('hidden');
+            loginForm.classList.remove('hidden');
+            adminLoginForm.classList.add('hidden');
+            document.getElementById('login-error').textContent = '';
+        }
+        
+        // Show admin login form
+        function showAdminLogin() {
+            loginForm.classList.add('hidden');
+            registerForm.classList.add('hidden');
+            adminLoginForm.classList.remove('hidden');
+            document.getElementById('admin-login-error').textContent = '';
+        }
+        
+        // Toggle file input based on content type
+        function toggleFileInput() {
+            const contentType = document.getElementById('content-type').value;
+            const fileInput = document.getElementById('content-file');
+            
+            if (contentType === 'video') {
+                fileInput.accept = '.mp4,.mov,.avi,.webm';
+            } else if (contentType === 'material') {
+                fileInput.accept = '.pdf,.doc,.docx,.txt';
+            } else {
+                fileInput.accept = '*';
+            }
+            
+            // Clear file preview
+            document.getElementById('file-preview').innerHTML = '';
+        }
+        
+        // Handle file preview
+        document.getElementById('content-file').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('file-preview');
+            preview.innerHTML = '';
+            
+            if (!file) return;
+            
+            if (file.type.startsWith('video/')) {
+                const video = document.createElement('video');
+                video.src = URL.createObjectURL(file);
+                video.controls = true;
+                video.style.maxWidth = '100%';
+                preview.appendChild(video);
+            } else if (file.type === 'application/pdf') {
+                const iframe = document.createElement('iframe');
+                iframe.src = URL.createObjectURL(file);
+                iframe.style.width = '100%';
+                iframe.style.height = '400px';
+                preview.appendChild(iframe);
+            } else {
+                const icon = document.createElement('i');
+                icon.className = 'fas fa-file';
+                icon.style.fontSize = '64px';
+                icon.style.color = '#2563eb';
+                preview.appendChild(icon);
+                
+                const fileName = document.createElement('p');
+                fileName.textContent = file.name;
+                preview.appendChild(fileName);
+            }
+        });
+        
+        // Register new user
+        function register() {
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            
+            if (!name || !email || !password) {
+                document.getElementById('register-error').textContent = 'All fields are required!';
+                return;
+            }
+            
+            // Check if user already exists
+            if (users.find(user => user.email === email)) {
+                document.getElementById('register-error').textContent = 'Email already registered!';
+                return;
+            }
+            
+            // Add new user
+            users.push({ name, email, password });
+            localStorage.setItem('eduHacksUsers', JSON.stringify(users));
+            
+            document.getElementById('register-error').textContent = '';
+            document.getElementById('register-success').textContent = 'Registration successful! Please login.';
+            
+            // Clear form
+            document.getElementById('register-name').value = '';
+            document.getElementById('register-email').value = '';
+            document.getElementById('register-password').value = '';
+            
+            // Show login form after a delay
+            setTimeout(showLoginForm, 2000);
+        }
+        
+        // Login user
+        function login() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            if (!email || !password) {
+                document.getElementById('login-error').textContent = 'Email and password are required!';
+                return;
+            }
+            
+            // Find user
+            const user = users.find(user => user.email === email && user.password === password);
+            
+            if (!user) {
+                document.getElementById('login-error').textContent = 'Invalid email or password!';
+                return;
+            }
+            
+            // Set current user
+            currentUser = user;
+            isAdmin = false;
+            
+            // Hide auth section and show app
+            authSection.classList.add('hidden');
+            app.classList.remove('hidden');
+            
+            // Update profile info
+            document.getElementById('profile-name').textContent = user.name;
+            document.getElementById('profile-email').textContent = user.email;
+            
+            // Show home page
+            showHomePage();
+        }
+        
+        // Admin login
+        function adminLogin() {
+            const email = document.getElementById('admin-email').value;
+            const password = document.getElementById('admin-password').value;
+            
+            if (!email || !password) {
+                document.getElementById('admin-login-error').textContent = 'Email and password are required!';
+                return;
+            }
+            
+            // Check admin credentials
+            if (email !== adminCredentials.email || password !== adminCredentials.password) {
+                document.getElementById('admin-login-error').textContent = 'Invalid admin credentials!';
+                return;
+            }
+            
+            // Set as admin
+            isAdmin = true;
+            currentUser = { name: "Admin", email: email };
+            
+            // Hide auth section and show app
+            authSection.classList.add('hidden');
+            app.classList.remove('hidden');
+            
+            // Update user stats
+            document.getElementById('total-users').textContent = users.length;
+            
+            // Load admin content
+            loadAdminContent();
+            
+            // Show admin panel
+            showAdminPanel();
+        }
+        
+        // Logout user
+        function logout() {
+            currentUser = null;
+            isAdmin = false;
+            app.classList.add('hidden');
+            authSection.classList.remove('hidden');
+            showLoginForm();
+        }
+        
+        // Show home page
+        function showHomePage() {
+            homePage.classList.remove('hidden');
+            subjectPage.classList.add('hidden');
+            profilePage.classList.add('hidden');
+            adminPanel.classList.add('hidden');
+        }
+        
+        // Show subject page
+        function showSubject(subject) {
+            homePage.classList.add('hidden');
+            subjectPage.classList.remove('hidden');
+            profilePage.classList.add('hidden');
+            adminPanel.classList.add('hidden');
+            
+            // Set subject title based on selected subject
+            const subjectTitles = {
+                'mathematics': 'Mathematics',
+                'science': 'Science',
+                'english': 'English',
+                'hindi': 'Hindi',
+                'social-science': 'Social Science',
+                'sanskrit': 'Sanskrit'
+            };
+            
+            document.getElementById('subject-title').textContent = subjectTitles[subject] || 'Subject';
+            
+            // Load content for this subject
+            loadSubjectContent(subject);
+        }
+        
+        // Load content for a subject
+        function loadSubjectContent(subject) {
+            // Filter content for this subject
+            const subjectContent = contentItems.filter(item => item.subject === subject);
+            
+            // Chapters
+            const chapters = subjectContent.filter(item => item.type === 'chapter');
+            const chaptersList = document.getElementById('chapters-list');
+            chaptersList.innerHTML = '';
+            
+            if (chapters.length === 0) {
+                chaptersList.innerHTML = '<div class="empty-content">No chapters available for this subject yet.</div>';
+            } else {
+                chapters.forEach(chapter => {
+                    const chapterItem = document.createElement('div');
+                    chapterItem.className = 'chapter-item';
+                    chapterItem.innerHTML = `
+                        <div>
+                            <strong>${chapter.title}</strong>
+                            <p>${chapter.description}</p>
+                        </div>
+                        <button class="download-btn" onclick="downloadMaterial('${chapter.title}', '${chapter.fileData}', '${chapter.fileType}')"><i class="fas fa-download"></i> Download Notes</button>
+                    `;
+                    chaptersList.appendChild(chapterItem);
+                });
+            }
+            
+            // Videos
+            const videos = subjectContent.filter(item => item.type === 'video');
+            const videosList = document.getElementById('videos-list');
+            videosList.innerHTML = '';
+            
+            if (videos.length === 0) {
+                videosList.innerHTML = '<div class="empty-content">No video lessons available for this subject yet.</div>';
+            } else {
+                videos.forEach(video => {
+                    const videoItem = document.createElement('div');
+                    videoItem.className = 'chapter-item';
+                    videoItem.innerHTML = `
+                        <div>
+                            <strong>${video.title}</strong>
+                            <p>${video.description}</p>
+                        </div>
+                        <button class="watch-btn" onclick="playVideo('${video.title}', '${video.fileData}')"><i class="fas fa-play"></i> Watch Now</button>
+                    `;
+                    videosList.appendChild(videoItem);
+                });
+            }
+            
+            // Materials
+            const materials = subjectContent.filter(item => item.type === 'material');
+            const materialsList = document.getElementById('materials-list');
+            materialsList.innerHTML = '';
+            
+            if (materials.length === 0) {
+                materialsList.innerHTML = '<div class="empty-content">No study materials available for this subject yet.</div>';
+            } else {
+                materials.forEach(material => {
+                    const materialItem = document.createElement('div');
+                    materialItem.className = 'chapter-item';
+                    materialItem.innerHTML = `
+                        <div>
+                            <strong>${material.title}</strong>
+                            <p>${material.description}</p>
+                        </div>
+                        <button class="download-btn" onclick="downloadMaterial('${material.title}', '${material.fileData}', '${material.fileType}')"><i class="fas fa-download"></i> Download</button>
+                    `;
+                    materialsList.appendChild(materialItem);
+                });
+            }
+        }
+        
+        // Play video
+        function playVideo(title, fileData) {
+            document.getElementById('video-modal-title').textContent = title;
+            const videoPlayer = document.getElementById('video-player');
+            videoPlayer.src = fileData;
+            videoModal.style.display = 'flex';
+            videoPlayer.play();
+        }
+        
+        // Close video modal
+        function closeVideoModal() {
+            videoModal.style.display = 'none';
+            const videoPlayer = document.getElementById('video-player');
+            videoPlayer.pause();
+            videoPlayer.src = '';
+        }
+        
+        // Toggle fullscreen
+        function toggleFullScreen() {
+            const videoContainer = document.querySelector('.video-container');
+            
+            if (!document.fullscreenElement) {
+                if (videoContainer.requestFullscreen) {
+                    videoContainer.requestFullscreen();
+                } else if (videoContainer.webkitRequestFullscreen) {
+                    videoContainer.webkitRequestFullscreen();
+                } else if (videoContainer.msRequestFullscreen) {
+                    videoContainer.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        }
+        
+        // Download material
+        function downloadMaterial(title, fileData, fileType) {
+            // Convert base64 to blob
+            const byteCharacters = atob(fileData.split(',')[1]);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: fileType });
+            
+            // Create download link
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = title;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+        
+        // Switch tabs in subject page
+        function switchSubjectTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('#subject-page .tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Deactivate all tabs
+            document.querySelectorAll('#subject-page .tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Activate selected tab
+            document.getElementById(`${tabId}-content`).classList.add('active');
+            
+            // Find and activate the clicked tab
+            document.querySelectorAll('#subject-page .tab').forEach(tab => {
+                if (tab.textContent.toLowerCase().includes(tabId)) {
+                    tab.classList.add('active');
+                }
+            });
+        }
+        
+        // Show profile page
+        function showProfile() {
+            homePage.classList.add('hidden');
+            subjectPage.classList.add('hidden');
+            profilePage.classList.remove('hidden');
+            adminPanel.classList.add('hidden');
+        }
+        
+        // Show admin panel
+        function showAdminPanel() {
+            homePage.classList.add('hidden');
+            subjectPage.classList.add('hidden');
+            profilePage.classList.add('hidden');
+            adminPanel.classList.remove('hidden');
+        }
+        
+        // Switch tabs in admin panel
+        function switchTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('#admin-panel .tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Deactivate all tabs
+            document.querySelectorAll('#admin-panel .tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Activate selected tab
+            document.getElementById(tabId).classList.add('active');
+            
+            // Find and activate the clicked tab
+            document.querySelectorAll('#admin-panel .tab').forEach(tab => {
+                if (tab.textContent.toLowerCase().includes(tabId.replace('-', ' '))) {
+                    tab.classList.add('active');
+                }
+            });
+            
+            // If manage content tab, reload content
+            if (tabId === 'manage-content') {
+                loadAdminContent();
+            }
+        }
+        
+        // Load admin content for management
+        function loadAdminContent() {
+            const adminContentList = document.getElementById('admin-content-list');
+            adminContentList.innerHTML = '';
+            
+            if (contentItems.length === 0) {
+                adminContentList.innerHTML = '<div class="empty-content">No content available yet.</div>';
+                return;
+            }
+            
+            contentItems.forEach((item, index) => {
+                const contentItem = document.createElement('div');
+                contentItem.className = 'content-item';
+                contentItem.innerHTML = `
+                    <div>
+                        <strong>${getSubjectName(item.subject)}: ${item.title}</strong>
+                        <p>${item.description}</p>
+                    </div>
+                    <div>
+                        <button class="admin-btn" style="background: var(--warning);" onclick="editContent(${index})"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="admin-btn" style="background: var(--danger);" onclick="deleteContent(${index})"><i class="fas fa-trash"></i> Delete</button>
+                    </div>
+                `;
+                adminContentList.appendChild(contentItem);
+            });
+        }
+        
+        // Get subject name from ID
+        function getSubjectName(subjectId) {
+            const subjectNames = {
+                'mathematics': 'Mathematics',
+                'science': 'Science',
+                'english': 'English',
+                'hindi': 'Hindi',
+                'social-science': 'Social Science',
+                'sanskrit': 'Sanskrit'
+            };
+            
+            return subjectNames[subjectId] || 'Unknown';
+        }
+        
+        // Add content (admin function)
+        function addContent() {
+            const subject = document.getElementById('content-subject').value;
+            const type = document.getElementById('content-type').value;
+            const title = document.getElementById('content-title').value;
+            const description = document.getElementById('content-description').value;
+            const fileInput = document.getElementById('content-file');
+            const file = fileInput.files[0];
+            
+            if (!title) {
+                alert('Title is required!');
+                return;
+            }
+            
+            if (!file) {
+                alert('Please upload a file!');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Add content item
+                const newContent = {
+                    subject,
+                    type,
+                    title,
+                    description,
+                    fileData: e.target.result,
+                    fileName: file.name,
+                    fileType: file.type,
+                    date: new Date().toLocaleDateString()
+                };
+                
+                contentItems.push(newContent);
+                
+                // Save to localStorage
+                localStorage.setItem('eduHacksContent', JSON.stringify(contentItems));
+                
+                alert(`Content added successfully!\nSubject: ${getSubjectName(subject)}\nType: ${type}\nTitle: ${title}`);
+                
+                // Clear form
+                document.getElementById('content-title').value = '';
+                document.getElementById('content-description').value = '';
+                fileInput.value = '';
+                document.getElementById('file-preview').innerHTML = '';
+            };
+            
+            reader.readAsDataURL(file);
+        }
+        
+        // Edit content (admin function)
+        function editContent(index) {
+            const item = contentItems[index];
+            alert(`Editing: ${item.title}\n\nThis feature would open a form to edit the content in a real application.`);
+        }
+        
+        // Delete content (admin function)
+        function deleteContent(index) {
+            if (confirm('Are you sure you want to delete this content item?')) {
+                contentItems.splice(index, 1);
+                localStorage.setItem('eduHacksContent', JSON.stringify(contentItems));
+                loadAdminContent();
+            }
+        }
+        
+        // Initialize the app
+        function init() {
+            // Check if user is already logged in (for demo purposes)
+            const savedUser = localStorage.getItem('eduHacksCurrentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                authSection.classList.add('hidden');
+                app.classList.remove('hidden');
+                showHomePage();
+            } else {
+                showLoginForm();
+            }
+            
+            // Close modal if clicked outside
+            window.onclick = function(event) {
+                if (event.target === videoModal) {
+                    closeVideoModal();
+                }
+            };
+        }
+        
+        // Run initialization when page loads
+        window.onload = init;
+    </script>
+</body>
+</html>
